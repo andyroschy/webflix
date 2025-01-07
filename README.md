@@ -16,7 +16,9 @@ npm run dev
 
 ### Featured Films
 
-1. Fetch the featured film from the remote api at `src/pages/api/featured`
+The featured film is the movie that covers the entire page on the figma design.
+
+1. Fetch the featured film from the remote api at `src/pages/index.tsx`
 2. Store the featured film on the database every time we fetch it. (`prisma/schema.prisma`)
 3. Render the featured film on the landing page and implement the basic [Figma UI](https://www.figma.com/design/8IrWHW2aUQZN6ILycX6ug7/Liteflix-Challenge?node-id=0-1&node-type=canvas)
 
@@ -24,7 +26,9 @@ To handle the endpoint's images correctly, please refer to the developer documen
 
 ### Popular Films
 
-1. Fetch the popular films from the remote api at `src/pages/api/popular`
+Popular films are the list of film previews on the figma design.
+
+1. Fetch the popular films from the remote api at `src/pages/index.tsx`
 2. Store the popular films on the database every time we fetch it
 3. Render the popular films on the landing page and implement the basic [Figma UI](https://www.figma.com/design/8IrWHW2aUQZN6ILycX6ug7/Liteflix-Challenge?node-id=0-1&node-type=canvas)
 
@@ -35,8 +39,9 @@ To handle the endpoint's images correctly, please refer to the developer documen
 
 #### Tips & Tricks
 - We want to see an implementation as pixel perfect as possible.
-- The project uses Next.js Pages & Prisma. Leveraging its specific features is available but not required
+- The project uses Next.js Pages & Prisma. Leveraging its specific features is encourange but not required
 - You may consult outside sources like documentation, web search or AI but absolutely cannot copy-paste code of any sort.
+- Tailwind is available and optional
 
 This project uses next.js pages, prisma & sqlite.
 

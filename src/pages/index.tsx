@@ -4,7 +4,7 @@ import type { Movie } from "@prisma/client";
 import { FEATURED_FILM } from "@src/lib/endpoints";
 
 const bebas = Bebas_Neue({
-  weight: "400",
+  weight: ["400"],
   subsets: ["latin"],
 });
 
