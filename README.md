@@ -24,14 +24,6 @@ The featured film is the movie that covers the entire page on the figma design.
 
 To handle the endpoint's images correctly, please refer to the developer documentation: https://developer.themoviedb.org/docs/image-basics
 
-### Popular Films
-
-Popular films are the list of film previews on the figma design.
-
-1. Fetch the popular films from the remote api at `src/pages/index.tsx`
-2. Store the popular films on the database every time we fetch it
-3. Render the popular films on the landing page and implement the basic [Figma UI](https://www.figma.com/design/8IrWHW2aUQZN6ILycX6ug7/Liteflix-Challenge?node-id=0-1&node-type=canvas)
-
 ### Evaluation
 - Communication: how fluidly you express ideas and communicate while coding.
 - Problem Solving: how you overcome obstacles consistently.
