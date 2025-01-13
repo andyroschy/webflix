@@ -19,8 +19,11 @@ npm run dev
 The featured film is the movie that covers the entire page on the figma design.
 
 1. Fetch the featured film from the remote api at `src/pages/index.tsx`
-2. Store the featured film on the database every time we fetch it. (`prisma/schema.prisma`)
-3. Render the featured film on the landing page and implement the basic [Figma UI](https://www.figma.com/design/8IrWHW2aUQZN6ILycX6ug7/Liteflix-Challenge?node-id=0-1&node-type=canvas)
+2. Store the featured films that are not currently on the database every time we fetch them. (`prisma/schema.prisma`)
+3. Implement the desktop UI here: [Figma UI](https://www.figma.com/design/8IrWHW2aUQZN6ILycX6ug7/Liteflix-Challenge?node-id=0-1&node-type=canvas)
+  a. Focus only on the Desktop Landing page
+  b. Use featured films data to populate the imagery / film rendering
+  c. Focus on structure first, featured films second and icons last.
 
 To handle the endpoint's images correctly, please refer to the developer documentation: https://developer.themoviedb.org/docs/image-basics
 
