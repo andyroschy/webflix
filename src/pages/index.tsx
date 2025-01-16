@@ -2,11 +2,16 @@ import "./index.css";
 import { Bebas_Neue } from "next/font/google";
 import type { Movie } from "@prisma/client";
 import { FEATURED_FILM } from "@src/lib/endpoints";
+import { Header} from "@src/components/Header";
+import { Splash } from "@src/components/Splash";
+import { MoviesSideBar } from "@src/components/MoviesSidebar";
 
 const bebas = Bebas_Neue({
   weight: ["400"],
   subsets: ["latin"],
 });
+
+const placeholder = {id:0, image_url: '', name: '', vote_average: 1};
 
 export default function Home({
   featured,
@@ -17,8 +22,9 @@ export default function Home({
 }) {
   return (
     <div className={bebas.className}>
-      <h1 className="text-4xl">Liteflix Challenge </h1>
-      <p> Replace this page with your implementation </p>
+      <Header />
+      <Splash featured={placeholder}/>
+      <MoviesSideBar movies={[placeholder, placeholder]}></MoviesSideBar>
     </div>
   );
 }
