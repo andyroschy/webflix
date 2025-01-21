@@ -1,14 +1,14 @@
 export function Header() {
 
-  return <header>
+  return <header className="flex flex-row justify-between">
     <div>
-      <div>LOGO</div>
-      <div>Add moives</div>
+      <span>LOGO</span>
+      <button>Agregar peliculas</button>
     </div>
     <div>
-      <div>burger <menu></menu></div>
-      <div>notifications</div>
-      <div>login button</div>
+      <span>burger</span>
+      <span>notifications</span>
+      <span>login button</span>
     </div>
   </header>
 }

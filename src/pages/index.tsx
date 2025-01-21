@@ -7,6 +7,7 @@ import { Splash } from "@src/components/Splash";
 import { MoviesSideBar } from "@src/components/MoviesSidebar";
 import { prisma } from "@src/lib/prisma";
 import { Suspense, use, useEffect, useState } from "react";
+import { buildImgUrl } from "@src/lib/utils";
 
 const bebas = Bebas_Neue({
   weight: ["400"],
@@ -66,13 +67,22 @@ export default function Home({
   if (!movies) return "loading...";
 
   return (
-    <div className={bebas.className}>
-      <Suspense fallback={"loading..."}>
+    <Suspense fallback={"loading..."}>
+      <div
+        className={"flex flex-col max-w-screen w-screen max-h-screen h-screen overflow-hidden px-16 " + bebas.className}
+        style={{
+          backgroundImage: `url(${buildImgUrl(featuredM.image_url, "large")}`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100% 100%",
+        }}
+      >
         <Header />
-        <Splash featured={featuredM} />
-        <MoviesSideBar movies={sidebarMvoies}></MoviesSideBar>
-      </Suspense>
-    </div>
+        <div className="flex flex-row justify-between mt-8">
+          <Splash featured={featuredM} />
+          <MoviesSideBar movies={sidebarMvoies.slice(0, 4)}></MoviesSideBar>
+        </div>
+      </div>
+    </Suspense>
   );
 }
 
