@@ -69,8 +69,7 @@ export default function Home({}: // featured,
     <Suspense fallback={"loading..."}>
       <div
         className={
-          "flex flex-col max-w-screen w-screen max-h-screen h-screen overflow-hidden px-16 pt-6 pb-16 " +
-          bebas.className
+          "max-w-screen w-screen max-h-screen h-screen " + bebas.className
         }
         style={{
           backgroundImage: `url(${buildImgUrl(featuredM.image_url, "large")}`,
@@ -78,10 +77,14 @@ export default function Home({}: // featured,
           backgroundSize: "100% 100%",
         }}
       >
-        <Header />
-        <div className="flex flex-row justify-between mt-8">
-          <Splash featured={featuredM} />
-          <MoviesSideBar movies={sidebarMvoies.slice(0, 4)}></MoviesSideBar>
+        <div
+          className={"flex flex-col h-full w-full max-w-screen1440 mx-auto "}
+        >
+          <Header />
+          <div className="flex flex-row justify-between mt-8">
+            <Splash featured={featuredM} />
+            <MoviesSideBar movies={sidebarMvoies.slice(0, 4)}></MoviesSideBar>
+          </div>
         </div>
       </div>
     </Suspense>

@@ -23,11 +23,14 @@ module.exports = {
         1: "1px",
       },
       width: {
-        '55': '220px'
+        55: "220px",
+      },
+      maxWidth: {
+        screen1440: "1440px",
       },
       borderRadius: {
-        'mdsm': '4px',
-      }
+        mdsm: "4px",
+      },
     },
   },
   plugins: [],
