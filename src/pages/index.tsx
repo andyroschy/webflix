@@ -35,11 +35,11 @@ export default function Home({ featured, popular }: Props) {
       >
         <div
           className={
-            "flex flex-col h-full w-full max-w-screen1440 mx-auto px-24"
+            "flex flex-col h-full w-full  mx-auto px-24"
           }
         >
           <Header />
-          <div className="flex flex-1 max-w-screen1440 flex-row justify-between">
+          <div className="flex flex-1 flex-row justify-between">
             <FeaturedFilm featured={featured} />
             <PopularFilms movies={popular}></PopularFilms>
           </div>
