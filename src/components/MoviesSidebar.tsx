@@ -1,5 +1,6 @@
 import { Movie } from "@prisma/client";
 import { IconPlay } from "@src/icons/play";
+import { IconStar } from "@src/icons/star";
 import { buildImgUrl } from "@src/lib/utils";
 
 interface Props {
@@ -41,15 +42,24 @@ function MoviePreview({ movie }: { movie: Movie }) {
       <div className="transition-opacity absolute left-0 top-0 flex flex-col justify-end items-center pb-4 w-60 h-36 text-white rounded-sm cursor-pointer opacity-0 group-hover/container:opacity-100 p-6 bg-[#24242478]">
         <div className="w-full flex flex-row justify-start">
           <button className="group/icon w-6 h-6 min-w-6 mb-4 border-1 border-white hover:border-black border-solid rounded-[100px] bg-[#24242480] hover:bg-teal-400">
-            <IconPlay className="align-middle inline-block" pathProps={{className: 'stroke-white group-hover/icon:stroke-black'}} />
+            <IconPlay
+              className="align-middle inline-block"
+              width={"12"}
+              height={"12"}
+              pathProps={{
+                className:
+                  "stroke-white group-hover/icon:stroke-black group-hover/icon:fill-black",
+              }}
+            />
           </button>
           <span className="text-center inline-block w-full text-base tracking-[4px] drop-shadow-titlesm">
             {movie.name}
           </span>
         </div>
-        <div className="flex flex-row w-full justify-between">
-          <span>*{movie.vote_average}</span>
-          <span className="tinline-block w-full text-base tracking-[4px] drop-shadow-titlesm text-right">
+        <div className="flex flex-row w-full justify-between tracking-[2px] text-sm leading-3">
+          <IconStar className="align-middle inline-block mr-1"></IconStar>
+          <span>{movie.vote_average}</span>
+          <span className="w-full tracking-[4px] drop-shadow-titlesm text-right">
             {movie.release_date?.getFullYear()}
           </span>
         </div>
