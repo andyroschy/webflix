@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 const variants = {
   solid: 'bg-[#242424] h-14 w-60 text-base font-normal leading-6 tracking-[4px]',
-  outline: 'bg-[#24242480] h-14 w-60 border-solid border-2 border-[#FFFFFF80] font-normal leading-6 tracking-[4px]',
+  outline: 'bg-[#24242480] h-14 w-60 border-solid border-1 border-[#FFFFFF80] font-normal leading-6 tracking-[4px]',
   text: '',
 };
 

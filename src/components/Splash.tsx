@@ -16,11 +16,11 @@ export function Splash({ featured }: { featured: Movie }) {
       </h1>
       <div>
         <Button variant="solid" className="mr-8 my-8">
-          <IconPlay fill="white" className="align-middle inline-block" />
+          <IconPlay color="white" className="align-middle inline-block" />
           <span className="whitespace-pre"> Reproducir</span>
         </Button>
         <Button variant="outline">
-          <IconPlus fill="white" className="align-middle inline-block" /> Mi
+          <IconPlus color="white" className="align-middle inline-block" /> Mi
           <span>Lista</span>
         </Button>
       </div>

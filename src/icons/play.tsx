@@ -3,7 +3,6 @@ import { SVGProps } from "react";
 export function IconPlay(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      className="align-middle inline-block"
       width="14"
       height="16"
       viewBox="0 0 14 16"

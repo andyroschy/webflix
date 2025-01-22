@@ -17,8 +17,11 @@ module.exports = {
         ],
       },
       dropShadow: {
-        'titlesm': '1px 1px 2px #000',
-      }
+        titlesm: "1px 1px 2px #000",
+      },
+      borderWidth: {
+        1: "1px",
+      },
     },
   },
   plugins: [],
