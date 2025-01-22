@@ -22,6 +22,7 @@ interface MovieResponseModel {
   title: string;
   vote_average: number;
   backdrop_path: string;
+  release_date: string;
 }
 
 interface QueryState<T, TError> {
@@ -94,12 +95,16 @@ export async function fetchMovies() {
   const res = await fetch(FEATURED_FILM);
   const response: MovieReponse = await res.json();
 
-  const mappedResult = response.results.map((r) => ({
-    id: r.id,
-    image_url: r.backdrop_path,
-    name: r.title,
-    vote_average: r.vote_average,
-  }));
+  const mappedResult = response.results.map(
+    (r) =>
+      ({
+        id: r.id,
+        image_url: r.backdrop_path,
+        name: r.title,
+        vote_average: r.vote_average,
+        release_date: new Date(r.release_date),
+      } as Movie)
+  );
 
   // we can 'fire and forget' here, no need to await for the DB
   // since we don't need the results back to continue
