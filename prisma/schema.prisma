@@ -15,4 +15,5 @@ model Movie {
   name         String @unique
   image_url    String @unique
   vote_average Float  @default(0)
+  release_date DateTime?
 }
