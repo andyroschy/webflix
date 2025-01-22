@@ -1,11 +1,11 @@
-import { Movie } from "@prisma/client";
 import { IconChevronDown } from "@src/icons/chevron-down";
 import { IconPlay } from "@src/icons/play";
 import { IconStar } from "@src/icons/star";
+import { SerializableMovie } from "@src/lib/types";
 import { buildImgUrl } from "@src/lib/utils";
 
 interface Props {
-  movies: Movie[];
+  movies: SerializableMovie[];
 }
 export function MoviesSideBar({ movies }: Props) {
   return (
@@ -35,7 +35,7 @@ function MoviePreview({ movie }: PreviewProps) {
     <li
       className=" relative left-0 top-0 rounded-smd w-55 h-38 mb-5 cursor-pointer group/container"
       style={{
-        backgroundImage: `url(${buildImgUrl(movie.image_url, "preview")}`,
+        backgroundImage: `url(${buildImgUrl(movie.image_url, "preview")})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
       }}
@@ -82,7 +82,7 @@ function HoverState({ movie }: Pick<PreviewProps, "movie">) {
         <IconStar className="align-middle inline-block mr-1"></IconStar>
         <span>{movie.vote_average}</span>
         <span className="w-full tracking-[4px] drop-shadow-titlesm text-right">
-          {movie.release_date?.getFullYear()}
+          {new Date(movie.release_date)?.getFullYear()}
         </span>
       </div>
     </div>
