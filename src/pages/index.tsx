@@ -6,7 +6,7 @@ import { Header } from "@src/components/Header";
 import { Splash } from "@src/components/Splash";
 import { MoviesSideBar } from "@src/components/MoviesSidebar";
 import { prisma } from "@src/lib/prisma";
-import { Suspense, use, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { buildImgUrl } from "@src/lib/utils";
 
 const bebas = Bebas_Neue({
@@ -25,6 +25,7 @@ interface MovieResponseModel {
 }
 
 interface QueryState<T, TError> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   promise: Promise<any> | null;
   isFetching: boolean;
   data: T | null;
@@ -33,14 +34,14 @@ interface QueryState<T, TError> {
 
 const placeholder = { id: 0, image_url: "", name: "", vote_average: 1 };
 
-export default function Home({
-  featured,
-  popular,
-}: {
+export default function Home({}: // featured,
+// popular,
+{
   featured: Movie[];
   popular: Movie[];
 }) {
   const [{ data: movies }, setMovieQueryState] = useState<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     QueryState<Movie[], any>
   >({
     data: null,
@@ -69,7 +70,10 @@ export default function Home({
   return (
     <Suspense fallback={"loading..."}>
       <div
-        className={"flex flex-col max-w-screen w-screen max-h-screen h-screen overflow-hidden px-16 " + bebas.className}
+        className={
+          "flex flex-col max-w-screen w-screen max-h-screen h-screen overflow-hidden px-16 " +
+          bebas.className
+        }
         style={{
           backgroundImage: `url(${buildImgUrl(featuredM.image_url, "large")}`,
           backgroundRepeat: "no-repeat",
@@ -107,6 +111,7 @@ export async function fetchMovies() {
 /**
  * @description Given an array of movies, this method persists those that are missing on the database.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function persistMissing(movies: Movie[]) {
   try {
     // since we we are using SQLite, we can't use skipDuplicate
