@@ -33,8 +33,6 @@ interface QueryState<T, TError> {
   error: TError | null;
 }
 
-const placeholder = { id: 0, image_url: "", name: "", vote_average: 1 };
-
 export default function Home({}: // featured,
 // popular,
 {
@@ -50,8 +48,6 @@ export default function Home({}: // featured,
     isFetching: false,
     promise: null,
   });
-  const [featuredM, ...sidebarMvoies] = movies ?? [placeholder];
-
   useEffect(() => {
     const promise = fetchMovies()
       .then((r) => {
@@ -67,6 +63,7 @@ export default function Home({}: // featured,
   }, []);
 
   if (!movies) return "loading...";
+  const [featuredM, ...sidebarMvoies] = movies;
 
   return (
     <Suspense fallback={"loading..."}>
@@ -91,7 +88,7 @@ export default function Home({}: // featured,
   );
 }
 
-export async function fetchMovies() {
+export async function fetchMovies(): Promise<Movie[]> {
   const res = await fetch(FEATURED_FILM);
   const response: MovieReponse = await res.json();
 

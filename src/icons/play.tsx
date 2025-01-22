@@ -1,6 +1,7 @@
+import path from "path";
 import { SVGProps } from "react";
 
-export function IconPlay(props: SVGProps<SVGSVGElement>) {
+export function IconPlay({pathProps, ...props}: SVGProps<SVGSVGElement> & { pathProps?: SVGProps<SVGPathElement> }) {
   return (
     <svg
       width="14"
@@ -11,10 +12,11 @@ export function IconPlay(props: SVGProps<SVGSVGElement>) {
       {...props}
     >
       <path
+        className="stroke-white"
         fill-rule="evenodd"
         clip-rule="evenodd"
         d="M11.9423 8.2363L2.625 1.875V14.125L11.9423 8.2363Z"
-        stroke="white"
+        {...pathProps}
       />
     </svg>
   );
