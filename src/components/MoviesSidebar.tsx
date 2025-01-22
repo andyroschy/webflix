@@ -28,7 +28,7 @@ function MoviePreview({ movie }: { movie: Movie }) {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <span className="text-center inline-block w-full text-base tracking-[4px]">
+      <span className="text-center inline-block w-full text-base tracking-[4px] drop-shadow-titlesm">
         {movie.name}
       </span>
     </li>
