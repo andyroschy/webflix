@@ -78,10 +78,10 @@ export default function Home({}: // featured,
         }}
       >
         <div
-          className={"flex flex-col h-full w-full max-w-screen1440 mx-auto "}
+          className={"flex flex-col h-full w-full max-w-screen1440 mx-auto px-25"}
         >
           <Header />
-          <div className="flex flex-row justify-between mt-8">
+          <div className="flex flex-1 flex-row justify-between">
             <Splash featured={featuredM} />
             <MoviesSideBar movies={sidebarMvoies.slice(0, 4)}></MoviesSideBar>
           </div>

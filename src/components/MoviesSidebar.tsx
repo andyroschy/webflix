@@ -10,7 +10,7 @@ interface Props {
 export function MoviesSideBar({ movies }: Props) {
   return (
     <div>
-      <div className="text-center text-lg tracking-[4px] leading-5 mb-8 hover:drop-shadow-titlesm cursor-pointer">
+      <div className="text-center text-lg tracking-[4px] leading-5 mt-[72px] mb-8 hover:drop-shadow-titlesm cursor-pointer">
         <span>
           <span>Ver:</span>
           <span className="font-bold ">Populares</span>
@@ -33,7 +33,7 @@ interface PreviewProps {
 function MoviePreview({ movie }: PreviewProps) {
   return (
     <li
-      className=" relative left-0 top-0 rounded-sm w-55 h-36 mb-8 cursor-pointer group/container"
+      className=" relative left-0 top-0 rounded-smd w-55 h-36 mb-5 cursor-pointer group/container"
       style={{
         backgroundImage: `url(${buildImgUrl(movie.image_url, "preview")}`,
         backgroundRepeat: "no-repeat",
@@ -48,8 +48,8 @@ function MoviePreview({ movie }: PreviewProps) {
 
 function DefaultState({ movie }: Pick<PreviewProps, "movie">) {
   return (
-    <div className="transition-opacity absolute left-0 top-0 flex flex-col justify-end items-center pb-4 w-full h-full text-white group-hover/container:opacity-0 opacity-100 ">
-      <button className="w-10 h-10 mb-4 border-1 border-white border-solid rounded-[100px] bg-[#24242480]">
+    <div className="transition-opacity absolute left-0 top-0 flex flex-col justify-end items-center pb-3 w-full h-full text-white group-hover/container:opacity-0 opacity-100 ">
+      <button className="w-10 h-10 mb-4 border-1 border-white border-solid rounded-full bg-[#24242480]">
         <IconPlay color="white" className="align-middle inline-block " />
       </button>
       <span className="text-center inline-block w-full text-base tracking-[4px] drop-shadow-titlesm">
@@ -62,8 +62,8 @@ function DefaultState({ movie }: Pick<PreviewProps, "movie">) {
 function HoverState({ movie }: Pick<PreviewProps, "movie">) {
   return (
     <div className="transition-opacity absolute left-0 top-0 flex flex-col justify-end items-center pb-4 w-full h-full text-white  cursor-pointer opacity-0 group-hover/container:opacity-100 p-6 bg-[#24242478]">
-      <div className="w-full flex flex-row justify-start mb-4">
-        <button className="group/icon w-6 h-6 min-w-6 border-1 border-white hover:border-black border-solid rounded-[100px] bg-[#24242480] hover:bg-teal-400">
+      <div className="w-full flex flex-row justify-start mb-5">
+        <button className="mt-auto group/icon w-6 h-6 min-w-6 border-1 border-white hover:border-black border-solid rounded-[100px] bg-[#24242480] hover:bg-teal-400">
           <IconPlay
             className="align-middle inline-block"
             width={"12"}

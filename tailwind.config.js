@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      padding: {
+        '25': '104px'
+      },
       fontSize: {
         title: [
           "120px",
@@ -24,12 +27,13 @@ module.exports = {
       },
       width: {
         55: "220px",
+        62: '248px',
       },
       maxWidth: {
         screen1440: "1440px",
       },
       borderRadius: {
-        mdsm: "4px",
+        smd: "4px",
       },
     },
   },
