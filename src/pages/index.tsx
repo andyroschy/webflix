@@ -69,7 +69,7 @@ export default function Home({}: // featured,
     <Suspense fallback={"loading..."}>
       <div
         className={
-          "flex flex-col max-w-screen w-screen max-h-screen h-screen overflow-hidden px-16 " +
+          "flex flex-col max-w-screen w-screen max-h-screen h-screen overflow-hidden px-16 pt-6 pb-16 " +
           bebas.className
         }
         style={{
@@ -138,7 +138,7 @@ async function persistMissing(movies: Movie[]) {
       data: movies.filter((x) => !alreadyOnDb.has(x.id)),
     });
   } catch (error) {
-    // in a real world applicaiotion proper error handling would include
+    // in a real world application proper error handling would include
     // logging to monitoring tools like grafana, retrying retryable errors, etc
     console.error(error);
   }
