@@ -1,5 +1,7 @@
 import { Movie } from "@prisma/client";
 import Button from "./button";
+import { IconPlay } from "@src/icons/play";
+import { IconPlus } from "@src/icons/plus";
 
 export function Splash({ featured }: { featured: Movie }) {
   return (
@@ -9,10 +11,18 @@ export function Splash({ featured }: { featured: Movie }) {
         <span className="font-bold">LITEFLIX</span>
       </span>
       {/* negative indent to compensenate "padding" added by the large font*/}
-      <h1 className="text-title text-teal-300 text-left -indent-1 font-bold">{featured.name}</h1>
+      <h1 className="text-title text-teal-300 text-left -indent-1 font-bold">
+        {featured.name}
+      </h1>
       <div>
-        <Button variant="solid" className="mr-8 my-8">Reproducir</Button>
-        <Button variant="outline">Mi Lista</Button>
+        <Button variant="solid" className="mr-8 my-8">
+          <IconPlay fill="white" className="align-middle inline-block" />
+          <span className="whitespace-pre"> Reproducir</span>
+        </Button>
+        <Button variant="outline">
+          <IconPlus fill="white" className="align-middle inline-block" /> Mi
+          <span>Lista</span>
+        </Button>
       </div>
     </div>
   );
