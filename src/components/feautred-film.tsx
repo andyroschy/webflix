@@ -3,7 +3,7 @@ import { IconPlay } from "@src/icons/play";
 import { IconPlus } from "@src/icons/plus";
 import { SerializableMovie } from "@src/lib/types";
 
-export function Splash({ featured }: { featured: SerializableMovie }) {
+export function FeaturedFilm({ featured }: { featured: SerializableMovie }) {
   return (
     <div className="flex flex-col justify-end h-full pb-[156px]">
       <span className="text-xl/5 tracking-[3px] mb-4 drop-shadow-titlesm">

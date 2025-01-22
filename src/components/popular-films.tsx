@@ -2,12 +2,12 @@ import { IconChevronDown } from "@src/icons/chevron-down";
 import { IconPlay } from "@src/icons/play";
 import { IconStar } from "@src/icons/star";
 import { SerializableMovie } from "@src/lib/types";
-import { buildImgUrl } from "@src/lib/utils";
+import { buildImgUrl } from "@src/lib/images";
 
 interface Props {
   movies: SerializableMovie[];
 }
-export function MoviesSideBar({ movies }: Props) {
+export function PopularFilms({ movies }: Props) {
   return (
     <div>
       <div className="text-center text-lg tracking-[4px] leading-5 mt-[72px] mb-8 hover:drop-shadow-titlesm cursor-pointer">

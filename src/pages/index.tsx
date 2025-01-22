@@ -2,12 +2,12 @@ import "./index.css";
 import { Bebas_Neue } from "next/font/google";
 import type { Movie } from "@prisma/client";
 import { FEATURED_FILM } from "@src/lib/endpoints";
-import { Header } from "@src/components/Header";
-import { Splash } from "@src/components/Splash";
-import { MoviesSideBar } from "@src/components/MoviesSidebar";
+import { Header } from "@src/components/header";
+import { FeaturedFilm } from "@src/components/feautred-film";
+import { PopularFilms } from "@src/components/popular-films";
 import { prisma } from "@src/lib/prisma";
 import { Suspense } from "react";
-import { buildImgUrl } from "@src/lib/utils";
+import { buildImgUrl } from "@src/lib/images";
 import { GetServerSidePropsResult } from "next";
 import { SerializableMovie } from "@src/lib/types";
 
@@ -15,18 +15,6 @@ const bebas = Bebas_Neue({
   weight: ["400"],
   subsets: ["latin"],
 });
-
-interface MovieReponse {
-  results: MovieResponseModel[];
-}
-interface MovieResponseModel {
-  id: number;
-  title: string;
-  vote_average: number;
-  backdrop_path: string;
-  release_date: string;
-}
-
 interface Props {
   featured: SerializableMovie;
   popular: SerializableMovie[];
@@ -52,13 +40,27 @@ export default function Home({ featured, popular }: Props) {
         >
           <Header />
           <div className="flex flex-1 max-w-screen1440 flex-row justify-between">
-            <Splash featured={featured} />
-            <MoviesSideBar movies={popular}></MoviesSideBar>
+            <FeaturedFilm featured={featured} />
+            <PopularFilms movies={popular}></PopularFilms>
           </div>
         </div>
       </div>
     </Suspense>
   );
+}
+
+
+
+interface MovieReponse {
+  results: MovieResponseModel[];
+}
+
+interface MovieResponseModel {
+  id: number;
+  title: string;
+  vote_average: number;
+  backdrop_path: string;
+  release_date: string;
 }
 
 export async function getServerSideProps() {
@@ -92,7 +94,6 @@ export async function getServerSideProps() {
 /**
  * @description Given an array of movies, this method persists those that are missing on the database.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function persistMissing(movies: Movie[]) {
   try {
     // since we we are using SQLite, we can't use skipDuplicate
