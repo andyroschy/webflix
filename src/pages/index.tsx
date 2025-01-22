@@ -6,9 +6,9 @@ import { Header } from "@src/components/Header";
 import { Splash } from "@src/components/Splash";
 import { MoviesSideBar } from "@src/components/MoviesSidebar";
 import { prisma } from "@src/lib/prisma";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import { buildImgUrl } from "@src/lib/utils";
-import { GetServerSideProps, GetServerSidePropsResult } from "next";
+import { GetServerSidePropsResult } from "next";
 import { SerializableMovie } from "@src/lib/types";
 
 const bebas = Bebas_Neue({
@@ -25,14 +25,6 @@ interface MovieResponseModel {
   vote_average: number;
   backdrop_path: string;
   release_date: string;
-}
-
-interface QueryState<T, TError> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  promise: Promise<any> | null;
-  isFetching: boolean;
-  data: T | null;
-  error: TError | null;
 }
 
 interface Props {

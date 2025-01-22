@@ -1,4 +1,3 @@
-import path from "path";
 import { SVGProps } from "react";
 
 export function IconPlay({pathProps, ...props}: SVGProps<SVGSVGElement> & { pathProps?: SVGProps<SVGPathElement> }) {
