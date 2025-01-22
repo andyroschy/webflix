@@ -15,4 +15,4 @@ export function IconMenu(props: SVGProps<SVGSVGElement>) {
       <path d="M10 13H27" stroke="white" />
     </svg>
   );
-};
+}

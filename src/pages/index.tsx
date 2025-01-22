@@ -33,7 +33,6 @@ interface Props {
 }
 
 export default function Home({ featured, popular }: Props) {
-
   return (
     <Suspense fallback={"loading..."}>
       <div
@@ -86,7 +85,7 @@ export async function getServerSideProps() {
     release_date: r.release_date!.toISOString(),
   }));
   return {
-    props: { featured, popular: popular.slice(0,4) },
+    props: { featured, popular: popular.slice(0, 4) },
   } satisfies GetServerSidePropsResult<Props>;
 }
 
