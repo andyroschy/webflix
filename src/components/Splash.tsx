@@ -11,8 +11,8 @@ export function Splash({ featured }: { featured: Movie }) {
       {/* negative indent to compensenate "padding" added by the large font*/}
       <h1 className="text-title text-teal-300 text-left -indent-1 font-bold">{featured.name}</h1>
       <div>
-        <Button variant="solid">Reproducir</Button>
-        <button>Mi Lista</button>
+        <Button variant="solid" className="mr-8 my-8">Reproducir</Button>
+        <Button variant="outline">Mi Lista</Button>
       </div>
     </div>
   );
