@@ -22,6 +22,12 @@ module.exports = {
       borderWidth: {
         1: "1px",
       },
+      width: {
+        '55': '220px'
+      },
+      borderRadius: {
+        'mdsm': '4px',
+      }
     },
   },
   plugins: [],
