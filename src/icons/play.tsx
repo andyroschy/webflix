@@ -1,6 +1,9 @@
 import { SVGProps } from "react";
 
-export function IconPlay({pathProps, ...props}: SVGProps<SVGSVGElement> & { pathProps?: SVGProps<SVGPathElement> }) {
+export function IconPlay({
+  pathProps,
+  ...props
+}: SVGProps<SVGSVGElement> & { pathProps?: SVGProps<SVGPathElement> }) {
   return (
     <svg
       width="14"
