@@ -1,4 +1,5 @@
 import { Movie } from "@prisma/client";
+import { IconChevronDown } from "@src/icons/chevron-down";
 import { IconPlay } from "@src/icons/play";
 import { IconStar } from "@src/icons/star";
 import { buildImgUrl } from "@src/lib/utils";
@@ -9,8 +10,12 @@ interface Props {
 export function MoviesSideBar({ movies }: Props) {
   return (
     <div>
-      <div>
-        <span>Ver:</span>Populares
+      <div className="text-center text-lg tracking-[4px] leading-5 mb-8 drop-shadow-titlesm cursor-pointer">
+        <span>
+          <span>Ver:</span>
+          <span className="font-bold ">Populares</span>
+        </span>
+        <IconChevronDown className="align-middle inline-block ml-2" />
       </div>
       <ul>
         {movies.map((m) => (
@@ -21,7 +26,11 @@ export function MoviesSideBar({ movies }: Props) {
   );
 }
 
-function MoviePreview({ movie }: { movie: Movie }) {
+interface PreviewProps {
+  movie: Props["movies"][0];
+}
+
+function MoviePreview({ movie }: PreviewProps) {
   return (
     <li
       className=" relative left-0 top-0 rounded-sm w-60 h-36 mb-8 cursor-pointer group/container"
@@ -31,39 +40,51 @@ function MoviePreview({ movie }: { movie: Movie }) {
         backgroundSize: "100% 100%",
       }}
     >
-      <div className="transition-opacity absolute left-0 top-0 flex flex-col justify-end items-center pb-4 w-60 h-36 text-white rounded-sm group-hover/container:opacity-0 opacity-100 ">
-        <button className="w-10 h-10 mb-4 border-1 border-white border-solid rounded-[100px] bg-[#24242480]">
-          <IconPlay color="white" className="align-middle inline-block " />
+      <DefaultState movie={movie} />
+      <HoverState movie={movie} />
+    </li>
+  );
+}
+
+function DefaultState({ movie }: Pick<PreviewProps, "movie">) {
+  return (
+    <div className="transition-opacity absolute left-0 top-0 flex flex-col justify-end items-center pb-4 w-60 h-36 text-white rounded-sm group-hover/container:opacity-0 opacity-100 ">
+      <button className="w-10 h-10 mb-4 border-1 border-white border-solid rounded-[100px] bg-[#24242480]">
+        <IconPlay color="white" className="align-middle inline-block " />
+      </button>
+      <span className="text-center inline-block w-full text-base tracking-[4px] drop-shadow-titlesm">
+        {movie.name}
+      </span>
+    </div>
+  );
+}
+
+function HoverState({ movie }: Pick<PreviewProps, "movie">) {
+  return (
+    <div className="transition-opacity absolute left-0 top-0 flex flex-col justify-end items-center pb-4 w-60 h-36 text-white rounded-sm cursor-pointer opacity-0 group-hover/container:opacity-100 p-6 bg-[#24242478]">
+      <div className="w-full flex flex-row justify-start">
+        <button className="group/icon w-6 h-6 min-w-6 mb-4 border-1 border-white hover:border-black border-solid rounded-[100px] bg-[#24242480] hover:bg-teal-400">
+          <IconPlay
+            className="align-middle inline-block"
+            width={"12"}
+            height={"12"}
+            pathProps={{
+              className:
+                "stroke-white group-hover/icon:stroke-black group-hover/icon:fill-black",
+            }}
+          />
         </button>
         <span className="text-center inline-block w-full text-base tracking-[4px] drop-shadow-titlesm">
           {movie.name}
         </span>
       </div>
-      <div className="transition-opacity absolute left-0 top-0 flex flex-col justify-end items-center pb-4 w-60 h-36 text-white rounded-sm cursor-pointer opacity-0 group-hover/container:opacity-100 p-6 bg-[#24242478]">
-        <div className="w-full flex flex-row justify-start">
-          <button className="group/icon w-6 h-6 min-w-6 mb-4 border-1 border-white hover:border-black border-solid rounded-[100px] bg-[#24242480] hover:bg-teal-400">
-            <IconPlay
-              className="align-middle inline-block"
-              width={"12"}
-              height={"12"}
-              pathProps={{
-                className:
-                  "stroke-white group-hover/icon:stroke-black group-hover/icon:fill-black",
-              }}
-            />
-          </button>
-          <span className="text-center inline-block w-full text-base tracking-[4px] drop-shadow-titlesm">
-            {movie.name}
-          </span>
-        </div>
-        <div className="flex flex-row w-full justify-between tracking-[2px] text-sm leading-3">
-          <IconStar className="align-middle inline-block mr-1"></IconStar>
-          <span>{movie.vote_average}</span>
-          <span className="w-full tracking-[4px] drop-shadow-titlesm text-right">
-            {movie.release_date?.getFullYear()}
-          </span>
-        </div>
+      <div className="flex flex-row w-full justify-between tracking-[2px] text-sm leading-3">
+        <IconStar className="align-middle inline-block mr-1"></IconStar>
+        <span>{movie.vote_average}</span>
+        <span className="w-full tracking-[4px] drop-shadow-titlesm text-right">
+          {movie.release_date?.getFullYear()}
+        </span>
       </div>
-    </li>
+    </div>
   );
 }
