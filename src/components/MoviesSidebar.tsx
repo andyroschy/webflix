@@ -33,7 +33,7 @@ interface PreviewProps {
 function MoviePreview({ movie }: PreviewProps) {
   return (
     <li
-      className=" relative left-0 top-0 rounded-smd w-55 h-36 mb-5 cursor-pointer group/container"
+      className=" relative left-0 top-0 rounded-smd w-55 h-38 mb-5 cursor-pointer group/container"
       style={{
         backgroundImage: `url(${buildImgUrl(movie.image_url, "preview")}`,
         backgroundRepeat: "no-repeat",
@@ -50,7 +50,7 @@ function DefaultState({ movie }: Pick<PreviewProps, "movie">) {
   return (
     <div className="transition-opacity absolute left-0 top-0 flex flex-col justify-end items-center pb-3 w-full h-full text-white group-hover/container:opacity-0 opacity-100 ">
       <button className="w-10 h-10 mb-4 border-1 border-white border-solid rounded-full bg-[#24242480]">
-        <IconPlay color="white" className="align-middle inline-block " />
+        <IconPlay color="white" width={'18px'} height={'18px'} className="align-middle inline-block " />
       </button>
       <span className="text-center inline-block w-full text-base tracking-[4px] drop-shadow-titlesm">
         {movie.name}
