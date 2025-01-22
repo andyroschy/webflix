@@ -8,6 +8,8 @@ import { MoviesSideBar } from "@src/components/MoviesSidebar";
 import { prisma } from "@src/lib/prisma";
 import { Suspense, useEffect, useState } from "react";
 import { buildImgUrl } from "@src/lib/utils";
+import { GetServerSideProps, GetServerSidePropsResult } from "next";
+import { SerializableMovie } from "@src/lib/types";
 
 const bebas = Bebas_Neue({
   weight: ["400"],
@@ -33,37 +35,12 @@ interface QueryState<T, TError> {
   error: TError | null;
 }
 
-export default function Home({}: // featured,
-// popular,
-{
-  featured: Movie[];
-  popular: Movie[];
-}) {
-  const [{ data: movies }, setMovieQueryState] = useState<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    QueryState<Movie[], any>
-  >({
-    data: null,
-    error: null,
-    isFetching: false,
-    promise: null,
-  });
-  useEffect(() => {
-    const promise = fetchMovies()
-      .then((r) => {
-        setMovieQueryState((s) => ({ ...s, data: r, error: null }));
-      })
-      .catch((e) => {
-        setMovieQueryState((s) => ({ ...s, data: null, error: e }));
-      })
-      .finally(() => {
-        setMovieQueryState((s) => ({ ...s, isFetching: false }));
-      });
-    setMovieQueryState((s) => ({ ...s, isFetching: true, promise: promise }));
-  }, []);
+interface Props {
+  featured: SerializableMovie;
+  popular: SerializableMovie[];
+}
 
-  if (!movies) return "loading...";
-  const [featuredM, ...sidebarMvoies] = movies;
+export default function Home({ featured, popular }: Props) {
 
   return (
     <Suspense fallback={"loading..."}>
@@ -72,18 +49,20 @@ export default function Home({}: // featured,
           "max-w-screen w-screen max-h-screen h-screen " + bebas.className
         }
         style={{
-          backgroundImage: `url(${buildImgUrl(featuredM.image_url, "large")}`,
+          backgroundImage: `url(${buildImgUrl(featured.image_url, "large")})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "100% 100%",
         }}
       >
         <div
-          className={"flex flex-col h-full w-full max-w-screen1440 mx-auto px-24"}
+          className={
+            "flex flex-col h-full w-full max-w-screen1440 mx-auto px-24"
+          }
         >
           <Header />
           <div className="flex flex-1 max-w-screen1440 flex-row justify-between">
-            <Splash featured={featuredM} />
-            <MoviesSideBar movies={sidebarMvoies.slice(0, 4)}></MoviesSideBar>
+            <Splash featured={featured} />
+            <MoviesSideBar movies={popular}></MoviesSideBar>
           </div>
         </div>
       </div>
@@ -91,7 +70,7 @@ export default function Home({}: // featured,
   );
 }
 
-export async function fetchMovies(): Promise<Movie[]> {
+export async function getServerSideProps() {
   const res = await fetch(FEATURED_FILM);
   const response: MovieReponse = await res.json();
 
@@ -108,9 +87,15 @@ export async function fetchMovies(): Promise<Movie[]> {
 
   // we can 'fire and forget' here, no need to await for the DB
   // since we don't need the results back to continue
-  // persistMissing(mappedResult);
+  persistMissing(mappedResult);
 
-  return mappedResult;
+  const [featured, ...popular] = mappedResult.map((r) => ({
+    ...r,
+    release_date: r.release_date!.toISOString(),
+  }));
+  return {
+    props: { featured, popular: popular.slice(0,4) },
+  } satisfies GetServerSidePropsResult<Props>;
 }
 
 /**
