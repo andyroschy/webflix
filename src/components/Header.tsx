@@ -9,15 +9,21 @@ export function Header() {
     <header className="flex flex-row justify-between w-full">
       <div>
         <IconFlix className="align-middle inline-block" />
-        <Button variant="text" className="ml-16 text-lg leading-[18px] drop-shadow-titlesm">
+        <Button
+          variant="text"
+          className="ml-16 text-lg leading-[18px] drop-shadow-titlesm"
+        >
           <IconPlus color="white" className="align-middle inline-block mr-2" />
           <span>Agregar Películas</span>
         </Button>
       </div>
       <div>
-        <IconMenu className="align-middle inline-block mr-8" />
-        <IconBell className="align-middle inline-block mr-8" />
-        <span>login button</span>
+        <IconMenu className="align-middle inline-block mr-8 cursor-pointer" />
+        <IconBell className="align-middle inline-block mr-8 cursor-pointer" />
+        <button
+          className=" w-10 h-10 overflow-hiden align-middle rounded-full bg-[url('/profile.png')] cursor-pointer bg-top hover:shadow-sm"
+          style={{ backgroundSize: 40 }}
+        />
       </div>
     </header>
   );
