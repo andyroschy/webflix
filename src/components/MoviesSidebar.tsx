@@ -10,7 +10,7 @@ interface Props {
 export function MoviesSideBar({ movies }: Props) {
   return (
     <div>
-      <div className="text-center text-lg tracking-[4px] leading-5 mb-8 drop-shadow-titlesm cursor-pointer">
+      <div className="text-center text-lg tracking-[4px] leading-5 mb-8 hover:drop-shadow-titlesm cursor-pointer">
         <span>
           <span>Ver:</span>
           <span className="font-bold ">Populares</span>
@@ -33,7 +33,7 @@ interface PreviewProps {
 function MoviePreview({ movie }: PreviewProps) {
   return (
     <li
-      className=" relative left-0 top-0 rounded-mdsm w-55 h-36 mb-8 cursor-pointer group/container"
+      className=" relative left-0 top-0 rounded-sm w-55 h-36 mb-8 cursor-pointer group/container"
       style={{
         backgroundImage: `url(${buildImgUrl(movie.image_url, "preview")}`,
         backgroundRepeat: "no-repeat",
