@@ -70,13 +70,9 @@ function HoverState({ movie }: Pick<PreviewProps, "movie">) {
       <div className="w-full flex flex-row justify-start mb-5">
         <button className="mt-auto group/icon w-6 h-6 min-w-6 border-1 border-white hover:border-black border-solid rounded-[100px] bg-[#24242480] hover:bg-teal-400">
           <IconPlay
-            className="align-middle inline-block"
+            className="align-middle inline-block  group-hover/icon:stroke-black group-hover/icon:fill-black"
             width={"12"}
             height={"12"}
-            pathProps={{
-              className:
-                "stroke-white group-hover/icon:stroke-black group-hover/icon:fill-black",
-            }}
           />
         </button>
         <span className="text-center inline-block w-full text-base tracking-[4px] drop-shadow-titlesm">
