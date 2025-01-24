@@ -3,19 +3,48 @@ import { IconPlay } from "@src/icons/play";
 import { IconStar } from "@src/icons/star";
 import { SerializableMovie } from "@src/lib/types";
 import { buildImgUrl } from "@src/lib/images";
+import {
+  LegacyRef,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { IconCheck } from "@src/icons/check";
 
 interface Props {
   movies: SerializableMovie[];
 }
+
+const dropdownOptions: DropdownOption[] = [
+  {
+    id: "popular",
+    label: "Populares",
+  },
+  {
+    id: "my-movies",
+    label: "Mis Películas",
+  },
+];
+
 export function PopularFilms({ movies }: Props) {
+  const [selectedFilter, setSelectedFilter] = useState(dropdownOptions[0]);
+
   return (
     <div>
-      <div className="text-center text-lg tracking-[4px] leading-5 mt-[72px] mb-8 hover:drop-shadow-titlesm cursor-pointer">
-        <span>
-          <span>Ver:</span>
-          <span className="font-bold ">Populares</span>
-        </span>
-        <IconChevronDown className="align-middle inline-block ml-2" />
+      <div className="text-center text-lg tracking-[4px] leading-5 mt-[72px] mb-8">
+        <span>Ver:</span>
+        <DropDown
+          id="featured-selector"
+          selectedOptionId={selectedFilter.id}
+          options={dropdownOptions}
+          onSelect={(o) => setSelectedFilter(o)}
+          className="hover:drop-shadow-titlesm cursor-pointer"
+        >
+          {selectedFilter.label}
+          <IconChevronDown className="align-middle inline-block ml-2" />
+        </DropDown>
       </div>
       <ul>
         {movies.map((m) => (
@@ -23,6 +52,89 @@ export function PopularFilms({ movies }: Props) {
         ))}
       </ul>
     </div>
+  );
+}
+
+interface DropdownProps {
+  id: string;
+  selectedOptionId?: string;
+  options: DropdownOption[];
+  className?: string;
+  onSelect: (option: DropdownOption) => void;
+}
+
+interface DropdownOption {
+  id: string;
+  label: string;
+}
+
+function DropDown({
+  id,
+  options,
+  children,
+  selectedOptionId,
+  className,
+  onSelect,
+}: PropsWithChildren<DropdownProps>) {
+  const selectRef = useRef<HTMLUListElement | null>(null);
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (
+        !selectRef.current?.contains?.(e.target as Node) &&
+        !btnRef.current?.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("click", handler, {
+      capture: true,
+    });
+    return () => document.removeEventListener("click", handler);
+  }, [selectRef]);
+
+  return (
+    <>
+      <button
+        ref={btnRef}
+        id={id}
+        onClick={() => setIsOpen((open) => !open)}
+        className={className}
+      >
+        {children}
+      </button>
+      {isOpen && (
+        <>
+          <div className="w-4 h-2 m-0 bg-[#242424] [clip-path:polygon(50%_0,_0_100%,_100%_100%)] static translate-y-2 translate-x-44 drop-shadow-lg "></div>
+          <ul
+            ref={selectRef}
+            className="min-w-60 shadow-lg shadow-black py-3 bg-[#242424] cursor-pointer fixed -translate-x-6 translate-y-2 z-50 "
+            id={id}
+          >
+            {options.map((o) => (
+              <li
+                onClick={() => {
+                  setIsOpen(false);
+                  onSelect(o);
+                }}
+                className={`tracking-[4px] py-[10px] leading-4 text-left px-6 font-light [&.selected]:font-bold hover:bg-[#444444] hover:font-bold ${
+                  o.id === selectedOptionId ? "selected" : ""
+                }`}
+                key={o.id}
+              >
+                {o.label}
+                {o.id === selectedOptionId && (
+                  <IconCheck className="inline-block align-middle float-right " />
+                )}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </>
   );
 }
 
@@ -81,7 +193,7 @@ function HoverState({ movie }: Pick<PreviewProps, "movie">) {
       </div>
       <div className="flex flex-row w-full justify-between tracking-[2px] text-sm leading-3">
         <IconStar className="align-middle inline-block mr-1"></IconStar>
-        <span>{movie.vote_average}</span>
+        <span>{movie.vote_average.toFixed(2)}</span>
         <span className="w-full tracking-[4px] drop-shadow-titlesm text-right">
           {new Date(movie.release_date)?.getFullYear()}
         </span>
