@@ -1,4 +1,3 @@
-import "./index.css";
 import { Bebas_Neue } from "next/font/google";
 import type { Movie } from "@prisma/client";
 import { FEATURED_FILM } from "@src/lib/endpoints";
@@ -18,9 +17,10 @@ const bebas = Bebas_Neue({
 interface Props {
   featured: SerializableMovie;
   popular: SerializableMovie[];
+  myMovies: SerializableMovie[];
 }
 
-export default function Home({ featured, popular }: Props) {
+export default function Home({ featured, popular, myMovies }: Props) {
   return (
     <Suspense fallback={"loading..."}>
       <div
@@ -41,7 +41,7 @@ export default function Home({ featured, popular }: Props) {
           <Header />
           <div className="flex flex-1 flex-row justify-between">
             <FeaturedFilm featured={featured} />
-            <PopularFilms movies={popular}></PopularFilms>
+            <PopularFilms popular={popular} myMovies={myMovies}></PopularFilms>
           </div>
         </div>
       </div>
@@ -87,7 +87,7 @@ export async function getServerSideProps() {
     release_date: r.release_date!.toISOString(),
   }));
   return {
-    props: { featured, popular: popular.slice(0, 4) },
+    props: { featured, popular: popular.slice(0, 4), myMovies: popular.slice(4, 8) },
   } satisfies GetServerSidePropsResult<Props>;
 }
 

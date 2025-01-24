@@ -7,7 +7,8 @@ import { useState } from "react";
 import { DropDown, DropdownOption } from "./dropdown";
 
 interface Props {
-  movies: SerializableMovie[];
+  popular: SerializableMovie[];
+  myMovies: SerializableMovie[];
 }
 
 const dropdownOptions: DropdownOption[] = [
@@ -19,10 +20,11 @@ const dropdownOptions: DropdownOption[] = [
     id: "my-movies",
     label: "Mis Películas",
   },
-];
+]; 
 
-export function PopularFilms({ movies }: Props) {
+export function PopularFilms({ popular, myMovies }: Props) {
   const [selectedFilter, setSelectedFilter] = useState(dropdownOptions[0]);
+  const [displayedMovies, setDisplayedMovies] = useState(popular);
 
   return (
     <div>
@@ -32,7 +34,14 @@ export function PopularFilms({ movies }: Props) {
           id="featured-selector"
           selectedOptionId={selectedFilter.id}
           options={dropdownOptions}
-          onSelect={(o) => setSelectedFilter(o)}
+          onSelect={(o) => {
+            setSelectedFilter(o);
+            if (o.id === 'my-movies') {
+              setDisplayedMovies(myMovies);
+            } else {
+              setDisplayedMovies(popular);
+            }
+          }}
           className="hover:drop-shadow-titlesm cursor-pointer"
         >
           {selectedFilter.label}
@@ -40,7 +49,7 @@ export function PopularFilms({ movies }: Props) {
         </DropDown>
       </div>
       <ul>
-        {movies.map((m) => (
+        {displayedMovies.map((m) => (
           <MoviePreview key={m.id} movie={m} />
         ))}
       </ul>
@@ -49,7 +58,7 @@ export function PopularFilms({ movies }: Props) {
 }
 
 interface PreviewProps {
-  movie: Props["movies"][0];
+  movie: Props["popular"][0];
 }
 
 function MoviePreview({ movie }: PreviewProps) {
